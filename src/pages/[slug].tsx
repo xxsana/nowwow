@@ -1,7 +1,7 @@
 import Detail from "src/routes/Detail"
 import { filterPosts } from "src/libs/utils/notion"
 import { CONFIG } from "site.config"
-import { NextPageWithLayout } from "../types"
+import { NextPageWithLayout, PostDetail, TPost } from "../types"
 import CustomError from "src/routes/Error"
 import { getRecordMap, getPosts } from "src/apis"
 import MetaConfig from "src/components/MetaConfig"
@@ -30,18 +30,31 @@ export const getStaticPaths = async () => {
 export const getStaticProps: GetStaticProps = async (context) => {
   const slug = context.params?.slug
 
-  const posts = await getPosts()
-  const feedPosts = filterPosts(posts)
-  await queryClient.prefetchQuery(queryKey.posts(), () => feedPosts)
+  let posts = queryClient.getQueryData<TPost[]>(queryKey.posts())
+  let postDetail = queryClient.getQueryData<PostDetail>(
+    queryKey.post(`${slug}`)
+  )
 
-  const detailPosts = filterPosts(posts, filter)
-  const postDetail = detailPosts.find((t: any) => t.slug === slug)
-  const recordMap = await getRecordMap(postDetail?.id!)
+  if (!posts || process.env.NODE_ENV === "production") {
+    posts = await getPosts()
+  }
 
-  await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => ({
-    ...postDetail,
-    recordMap,
-  }))
+  if (!postDetail || process.env.NODE_ENV === "production") {
+    const detailPosts = filterPosts(posts, filter)
+    const post = detailPosts.find((t: any) => t.slug === slug)
+    const recordMap = await getRecordMap(post?.id!)
+    if (post) {
+      postDetail = {
+        ...post,
+        recordMap,
+      }
+    }
+  }
+
+  await queryClient.prefetchQuery(queryKey.posts(), () =>
+    filterPosts(posts || [])
+  )
+  await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => postDetail)
 
   return {
     props: {
