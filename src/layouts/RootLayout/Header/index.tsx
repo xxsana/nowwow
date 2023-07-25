@@ -2,16 +2,13 @@ import NavBar from "./NavBar"
 import Logo from "./Logo"
 import ThemeToggle from "./ThemeToggle"
 import styled from "@emotion/styled"
-import { zIndexes } from "src/styles/zIndexes"
 
-type Props = {
-  fullWidth: boolean
-}
+type Props = {}
 
-const Header: React.FC<Props> = ({ fullWidth }) => {
+const Header: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <div data-full-width={fullWidth} className="container">
+      <div className="container">
         <Logo />
         <div className="nav">
           <ThemeToggle />
@@ -25,33 +22,25 @@ const Header: React.FC<Props> = ({ fullWidth }) => {
 export default Header
 
 const StyledWrapper = styled.div`
-  z-index: ${zIndexes.header};
-  position: sticky;
+  position: fixed;
   top: 0;
-  margin-bottom: 0.5rem;
-  background-color: ${({ theme }) => theme.colors.gray2};
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  left: 0;
+  right: 0;
 
-  @media (min-width: 768px) {
-    margin-bottom: 1.5rem;
-  }
+  height: ${({ theme }) => theme.variables.headerHeight}px;
+  z-index: ${({ theme }) => theme.zIndexes.header};
+  padding: 0 ${({ theme }) => theme.variables.paddingLg}px;
+  background-color: ${({ theme }) => theme.colors.gray2};
 
   .container {
+    max-width: ${({ theme }) => theme.variables.widthLg}px;
     display: flex;
-    padding-left: 1rem;
-    padding-right: 1rem;
     justify-content: space-between;
     align-items: center;
-    width: 100%;
-    max-width: 1120px;
-    height: 3rem;
     margin: 0 auto;
-    &[data-full-width="true"] {
-      @media (min-width: 768px) {
-        padding-left: 6rem;
-        padding-right: 6rem;
-      }
-    }
+    height: 100%;
+    font-size: 14px;
+
     .nav {
       display: flex;
       gap: 0.75rem;

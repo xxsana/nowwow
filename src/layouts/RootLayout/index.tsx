@@ -5,6 +5,7 @@ import Header from "./Header"
 import styled from "@emotion/styled"
 import Scripts from "src/layouts/RootLayout/Scripts"
 import useGtagEffect from "./useGtagEffect"
+import { variables } from "src/styles"
 
 type Props = {
   children: ReactNode
@@ -18,8 +19,10 @@ const RootLayout = ({ children }: Props) => {
       <Scripts />
       {/* // TODO: replace react query */}
       {/* {metaConfig.type !== "Paper" && <Header />} */}
-      <Header fullWidth={false} />
-      <StyledMain>{children}</StyledMain>
+      <Header />
+      <StyledMain style={{ marginTop: variables.headerHeight }}>
+        {children}
+      </StyledMain>
     </ThemeProvider>
   )
 }
@@ -30,5 +33,4 @@ const StyledMain = styled.main`
   margin: 0 auto;
   width: 100%;
   max-width: 1120px;
-  padding: 0 1rem;
 `

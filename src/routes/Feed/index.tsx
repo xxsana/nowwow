@@ -10,6 +10,7 @@ import ProfileCard from "./ProfileCard"
 import ServiceCard from "./ServiceCard"
 import ContactCard from "./ContactCard"
 import PostList from "./PostList"
+import { variables } from "src/styles"
 
 type Props = {}
 
@@ -61,8 +62,10 @@ const StyledWrapper = styled.div`
   display: block;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 1.5rem;
+  padding: 36px ${variables.paddingMd}px;
 
   @media (min-width: 768px) {
+    padding: 48px ${variables.paddingLg}px;
     display: grid;
   }
 
