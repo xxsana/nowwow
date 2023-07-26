@@ -29,8 +29,4 @@ const RootLayout = ({ children }: Props) => {
 
 export default RootLayout
 
-const StyledMain = styled.main`
-  margin: 0 auto;
-  width: 100%;
-  max-width: 1120px;
-`
+const StyledMain = styled.main``

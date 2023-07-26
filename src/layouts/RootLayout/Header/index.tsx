@@ -29,11 +29,11 @@ const StyledWrapper = styled.div`
 
   height: ${({ theme }) => theme.variables.headerHeight}px;
   z-index: ${({ theme }) => theme.zIndexes.header};
-  padding: 0 ${({ theme }) => theme.variables.paddingLg}px;
-  background-color: ${({ theme }) => theme.colors.gray2};
+  background-color: ${({ theme }) => theme.colors.gray1};
 
   .container {
-    max-width: ${({ theme }) => theme.variables.widthLg}px;
+    padding: 0 ${({ theme }) => theme.variables.paddingLg}px;
+    max-width: ${({ theme }) => theme.variables.widthSm}px;
     display: flex;
     justify-content: space-between;
     align-items: center;

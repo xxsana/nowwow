@@ -1,57 +1,53 @@
-import { useState } from "react"
-
-import SearchInput from "./SearchInput"
 import { FeedHeader } from "./FeedHeader"
 import Footer from "./Footer"
 import styled from "@emotion/styled"
 import TagList from "./TagList"
 import MobileProfileCard from "./MobileProfileCard"
-import ProfileCard from "./ProfileCard"
-import ServiceCard from "./ServiceCard"
-import ContactCard from "./ContactCard"
 import PostList from "./PostList"
 import { variables } from "src/styles"
+import Image from "next/image"
+import { CONFIG } from "site.config"
+import { MdLink, MdLocationPin, MdMail } from "react-icons/md"
 
 type Props = {}
 
 const Feed: React.FC<Props> = () => {
-  const [q, setQ] = useState("")
-
   return (
     <StyledWrapper>
-      <div
-        className="lt"
-        css={{
-          height: "calc(100vh - 73px)",
-        }}
-      >
-        <TagList />
-      </div>
       <div className="mid">
+        <div className="profileSection">
+          <div className="lt">
+            <Image src={CONFIG.profile.image} fill alt="" />
+          </div>
+          <div className="rt">
+            <div className="name">{CONFIG.profile.name}</div>
+            <div className="bio">{CONFIG.profile.bio}</div>
+            {/* follow, follower */}
+            <div className="infoList">
+              <div className="infoItem">
+                <MdLocationPin />
+                <div>Seoul, South Korea</div>
+              </div>
+              <div className="infoItem">
+                <MdLink />
+                <div>http://untilled.team</div>
+              </div>
+              <div className="infoItem">
+                <MdMail />
+                <div>morethanmin@gmail.com</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <TagList />
         <MobileProfileCard />
-        <SearchInput value={q} onChange={(e) => setQ(e.target.value)} />
-        <div className="tags">
-          <TagList />
-        </div>
         <FeedHeader />
-        <PostList q={q} />
-        <div className="footer">
-          <Footer />
-        </div>
+        <PostList q={""} />
+        <Footer />
       </div>
-      <div
-        className="rt"
-        css={{
-          height: "calc(100vh - 73px)",
-        }}
-      >
-        <ProfileCard />
-        <ServiceCard />
-        <ContactCard />
-        <div className="footer">
-          <Footer />
-        </div>
-      </div>
+      {/* <ServiceCard />
+        <ContactCard /> */}
     </StyledWrapper>
   )
 }
@@ -59,76 +55,59 @@ const Feed: React.FC<Props> = () => {
 export default Feed
 
 const StyledWrapper = styled.div`
-  display: block;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: 1.5rem;
-  padding: 36px ${variables.paddingMd}px;
+  padding: ${variables.paddingLg}px;
+  max-width: ${({ theme }) => theme.variables.widthSm}px;
+  width: 100%;
+  margin: 0 auto;
 
-  @media (min-width: 768px) {
-    padding: 48px ${variables.paddingLg}px;
-    display: grid;
-  }
-
-  > .lt {
-    display: none;
-    overflow: scroll;
-    position: sticky;
-    grid-column: span 2 / span 2;
-    top: 73px;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
+  .profileSection {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    .lt {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      overflow: hidden;
+      border-radius: 50%;
+      background-color: ${({ theme }) => theme.colors.gray4};
     }
-
-    @media (min-width: 1024px) {
-      display: block;
-    }
-  }
-
-  > .mid {
-    grid-column: span 12 / span 12;
-
-    @media (min-width: 1024px) {
-      grid-column: span 7 / span 7;
-    }
-
-    > .tags {
-      display: block;
-
-      @media (min-width: 1024px) {
-        display: none;
+    > .rt {
+      .name {
+        font-size: 24px;
+        font-weight: 600;
+        line-height: 32px;
+      }
+      .bio {
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 21px;
+        color: ${({ theme }) => theme.colors.gray10};
+      }
+      .infoList {
+        margin-top: 8px;
+        font-size: 12px;
+        color: ${({ theme }) => theme.colors.gray11};
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 15px;
+        .infoItem {
+          display: flex;
+          align-items: center;
+          svg {
+            font-size: 16px;
+            margin-right: 4px;
+          }
+        }
       }
     }
-
-    > .footer {
-      padding-bottom: 2rem;
-      @media (min-width: 1024px) {
-        display: none;
-      }
-    }
+  }
+  hr {
+    margin: 24px 0;
   }
 
-  > .rt {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    &::-webkit-scrollbar {
-      display: none;
-    }
-
-    display: none;
-    overflow: scroll;
-    position: sticky;
-    top: 73px;
-
-    @media (min-width: 1024px) {
-      display: block;
-      grid-column: span 3 / span 3;
-    }
-
-    .footer {
-      padding-top: 1rem;
-    }
+  > .footer {
+    padding-bottom: 2rem;
   }
 `
