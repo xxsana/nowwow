@@ -5,6 +5,7 @@ import { formatDate } from "src/libs/utils"
 import Image from "next/image"
 import React from "react"
 import styled from "@emotion/styled"
+import { Avatar } from "src/components/Avatar"
 
 type Props = {
   data: TPost
@@ -20,12 +21,9 @@ const PostHeader: React.FC<Props> = ({ data }) => {
             {data.author && data.author[0] && data.author[0].name && (
               <>
                 <div className="author">
-                  <Image
-                    css={{ borderRadius: "50%" }}
+                  <Avatar
+                    size={24}
                     src={data.author[0].profile_photo || CONFIG.profile.image}
-                    alt="profile_photo"
-                    width={24}
-                    height={24}
                   />
                   <div className="">{data.author[0].name}</div>
                 </div>

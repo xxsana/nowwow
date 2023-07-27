@@ -3,6 +3,7 @@ import { CgUserlane } from "react-icons/cg"
 import styled from "@emotion/styled"
 import { colors, respondMobile } from "../../styles"
 import { css } from "@emotion/react"
+import Image from "next/image"
 
 type Props = {
   type?: "user" | "group"
@@ -22,7 +23,7 @@ const Avatar = forwardRef<HTMLDivElement, Props>(
         `}
         {...props}
       >
-        {src ? <img src={src} /> : <CgUserlane />}
+        {src ? <Image fill src={src} alt="author" /> : <CgUserlane />}
       </StyledWrapper>
     )
   }
@@ -40,10 +41,6 @@ const StyledWrapper = styled.div`
   justify-content: center;
   flex-shrink: 0;
   overflow: hidden;
-  img {
-    width: 100%;
-    height: 100%;
-  }
   svg {
     color: ${colors.light.gray1};
     width: 14px;

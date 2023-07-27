@@ -1,7 +1,9 @@
-import NavBar from "./NavBar"
+import IconButton from "src/components/IconButton"
 import Logo from "./Logo"
-import ThemeToggle from "./ThemeToggle"
+import ThemeToggle from "./ThemeToggleButton"
 import styled from "@emotion/styled"
+import Link from "next/link"
+import { MdRssFeed, MdSearch } from "react-icons/md"
 
 type Props = {}
 
@@ -10,9 +12,17 @@ const Header: React.FC<Props> = () => {
     <StyledWrapper>
       <div className="container">
         <Logo />
-        <div className="nav">
+        <div className="rt">
           <ThemeToggle />
-          <NavBar />
+          <IconButton>
+            <MdSearch />
+          </IconButton>
+          <IconButton>
+            <MdRssFeed />
+          </IconButton>
+          {/* <Link className="link" href="/about">
+            About
+          </Link> */}
         </div>
       </div>
     </StyledWrapper>
@@ -33,18 +43,26 @@ const StyledWrapper = styled.div`
 
   .container {
     padding: 0 ${({ theme }) => theme.variables.paddingLg}px;
-    max-width: ${({ theme }) => theme.variables.widthSm}px;
+    max-width: ${({ theme }) => theme.variables.widthMd}px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin: 0 auto;
     height: 100%;
     font-size: 14px;
-
-    .nav {
+    .rt {
       display: flex;
-      gap: 0.75rem;
       align-items: center;
+      gap: 6px;
+
+      .link {
+        background-color: ${({ theme }) => theme.colors.gray4};
+        padding: 10px 24px;
+        border-radius: 8px;
+        font-weight: 500;
+        opacity: 0.8;
+        font-size: 16px;
+      }
     }
   }
 `

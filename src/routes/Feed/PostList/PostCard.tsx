@@ -4,9 +4,7 @@ import { formatDate } from "src/libs/utils"
 import Tag from "../../../components/Tag"
 import { TPost } from "../../../types"
 import Image from "next/image"
-import Category from "../../../components/Category"
 import styled from "@emotion/styled"
-
 type Props = {
   data: TPost
 }
@@ -18,36 +16,35 @@ const PostCard: React.FC<Props> = ({ data }) => {
     <StyledWrapper href={`/${data.slug}`}>
       <article>
         <div className="lt">
-          {category && (
-            <div className="category">
-              <Category>{category}</Category>
-            </div>
-          )}
-          <div className="title">{data.title}</div>
-          <div className="date">
+          <div className="top">
             <div className="content">
-              {formatDate(
-                data?.date?.start_date || data.createdTime,
-                CONFIG.lang
-              )}
+              <div className="date">
+                {formatDate(
+                  data?.date?.start_date || data.createdTime,
+                  CONFIG.lang
+                )}
+              </div>
+              <div>·</div>
+              <div>5 min read</div>
             </div>
+            <div className="title">{data.title}</div>
+            <div className="summary">{data.summary}</div>
           </div>
-          <div className="summary">
-            <p>{data.summary}</p>
-          </div>
-          <div className="tags">
-            {data.tags &&
-              data.tags.map((tag: string, idx: number) => (
-                <Tag key={idx}>{tag}</Tag>
-              ))}
+          <div className="btm">
+            {category && <Tag>{category}</Tag>}
+            <div className="tags">
+              {data.tags &&
+                data.tags.map((tag: string, idx: number) => (
+                  <Tag key={idx}>{`#${tag}`}</Tag>
+                ))}
+            </div>
           </div>
         </div>
         {data.thumbnail && (
           <div className="rt">
             <Image
               src={data.thumbnail}
-              width={180}
-              height={180}
+              fill
               alt={data.title}
               css={{ objectFit: "cover" }}
             />
@@ -64,46 +61,60 @@ const StyledWrapper = styled(Link)`
   article {
     display: flex;
     justify-content: space-between;
+    height: 200px;
+    gap: 24px;
     > .lt {
-      > .category {
-      }
-      > .title {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-bottom: 0.5rem;
-        font-size: 1.25rem;
-        line-height: 1.75rem;
-        font-weight: 500;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 12px 0;
+      > .top {
+        > .category {
+        }
+        > .content {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 15px;
+          font-weight: 300;
+          margin-bottom: 12px;
+          color: ${({ theme }) => theme.colors.gray12};
+        }
 
-        cursor: pointer;
-      }
-      > .date {
-        display: flex;
-        margin-bottom: 1rem;
-        gap: 0.5rem;
-        align-items: center;
-        .content {
-          font-size: 0.875rem;
-          line-height: 1.25rem;
+        > .title {
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          font-size: 28px;
+          font-weight: 600;
+
+          cursor: pointer;
+          margin-bottom: 10px;
+        }
+
+        > .summary {
+          font-size: 20px;
+          font-weight: 300;
           color: ${({ theme }) => theme.colors.gray10};
         }
       }
-      > .summary {
-        margin-bottom: 1rem;
-        p {
-          line-height: 2rem;
-          color: ${({ theme }) => theme.colors.gray11};
-        }
-      }
-      > .tags {
+      > .btm {
         display: flex;
-        gap: 0.5rem;
+        gap: 12px;
+        align-items: center;
+        .tags {
+          display: flex;
+          gap: 12px;
+        }
       }
     }
     > .rt {
+      position: relative;
+      width: 260px;
+      height: 100%;
       border-radius: 12px;
       overflow: hidden;
+      flex-shrink: 0;
     }
   }
 `

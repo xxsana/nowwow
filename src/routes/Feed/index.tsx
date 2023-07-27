@@ -14,16 +14,15 @@ type Props = {}
 const Feed: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <div className="lt"></div>
+      <div className="lt">left</div>
       <div className="rt">
-        <div className="profileSection">
+        {/* <div className="profileSection">
           <div className="lt">
             <Image src={CONFIG.profile.image} fill alt="" />
           </div>
           <div className="rt">
             <div className="name">{CONFIG.profile.name}</div>
             <div className="bio">{CONFIG.profile.bio}</div>
-            {/* follow, follower */}
             <div className="infoList">
               <div className="infoItem">
                 <MdLocationPin />
@@ -39,9 +38,8 @@ const Feed: React.FC<Props> = () => {
               </div>
             </div>
           </div>
-        </div>
-        <hr />
-        <TagList />
+        </div> */}
+        {/* <TagList /> */}
         {/* <FeedHeader /> */}
         <PostList q={""} />
         <Footer />
@@ -56,9 +54,13 @@ export default Feed
 
 const StyledWrapper = styled.div`
   padding: ${variables.paddingLg}px;
-  max-width: ${({ theme }) => theme.variables.widthSm}px;
+  max-width: ${({ theme }) => theme.variables.widthMd}px;
   width: 100%;
   margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(300px, 300px) 1fr;
+  gap: 24px;
 
   .profileSection {
     display: flex;

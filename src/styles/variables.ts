@@ -4,6 +4,6 @@ export const variables = {
   paddingLg: 24,
   paddingMd: 20,
   widthLg: 1480,
-  widthMd: 1240,
+  widthMd: 1248,
   widthSm: 1040,
 }

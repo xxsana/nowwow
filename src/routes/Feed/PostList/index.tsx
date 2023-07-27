@@ -39,7 +39,6 @@ const PostList: React.FC<Props> = ({ q }) => {
         {filteredPosts.map((post, idx) => (
           <Fragment key={post.id}>
             <PostCard data={post} />
-            {filteredPosts.length !== idx + 1 && <hr />}
           </Fragment>
         ))}
       </StyledWrapper>
@@ -53,6 +52,7 @@ const StyledWrapper = styled.div`
   padding: 24px 0;
   display: flex;
   flex-direction: column;
+  gap: 48px;
   hr {
     margin: 24px 0;
   }
