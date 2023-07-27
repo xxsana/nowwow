@@ -14,7 +14,8 @@ type Props = {}
 const Feed: React.FC<Props> = () => {
   return (
     <StyledWrapper>
-      <div className="mid">
+      <div className="lt"></div>
+      <div className="rt">
         <div className="profileSection">
           <div className="lt">
             <Image src={CONFIG.profile.image} fill alt="" />
@@ -41,8 +42,7 @@ const Feed: React.FC<Props> = () => {
         </div>
         <hr />
         <TagList />
-        <MobileProfileCard />
-        <FeedHeader />
+        {/* <FeedHeader /> */}
         <PostList q={""} />
         <Footer />
       </div>

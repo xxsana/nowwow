@@ -17,25 +17,13 @@ const PostCard: React.FC<Props> = ({ data }) => {
   return (
     <StyledWrapper href={`/${data.slug}`}>
       <article>
-        {category && (
-          <div className="category">
-            <Category>{category}</Category>
-          </div>
-        )}
-        {data.thumbnail && (
-          <div className="thumbnail">
-            <Image
-              src={data.thumbnail}
-              fill
-              alt={data.title}
-              css={{ objectFit: "cover" }}
-            />
-          </div>
-        )}
-        <div data-thumb={!!data.thumbnail} className="content">
-          <header className="top">
-            <h2>{data.title}</h2>
-          </header>
+        <div className="lt">
+          {category && (
+            <div className="category">
+              <Category>{category}</Category>
+            </div>
+          )}
+          <div className="title">{data.title}</div>
           <div className="date">
             <div className="content">
               {formatDate(
@@ -54,6 +42,17 @@ const PostCard: React.FC<Props> = ({ data }) => {
               ))}
           </div>
         </div>
+        {data.thumbnail && (
+          <div className="rt">
+            <Image
+              src={data.thumbnail}
+              width={180}
+              height={180}
+              alt={data.title}
+              css={{ objectFit: "cover" }}
+            />
+          </div>
+        )}
       </article>
     </StyledWrapper>
   )
@@ -63,69 +62,21 @@ export default PostCard
 
 const StyledWrapper = styled(Link)`
   article {
-    overflow: hidden;
-    position: relative;
-    margin-bottom: 1.5rem;
-    border-radius: 1rem;
-    background-color: ${({ theme }) =>
-      theme.scheme === "light" ? "white" : theme.colors.gray4};
-    transition-property: box-shadow;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-
-    @media (min-width: 768px) {
-      margin-bottom: 2rem;
-    }
-
-    :hover {
-      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
-        0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    }
-    > .category {
-      position: absolute;
-      top: 1rem;
-      left: 1rem;
-      z-index: 10;
-    }
-
-    > .thumbnail {
-      position: relative;
-      width: 100%;
-      background-color: ${({ theme }) => theme.colors.gray2};
-      padding-bottom: 66%;
-
-      @media (min-width: 1024px) {
-        padding-bottom: 50%;
+    display: flex;
+    justify-content: space-between;
+    > .lt {
+      > .category {
       }
-    }
-    > .content {
-      padding: 1rem;
-
-      &[data-thumb="false"] {
-        padding-top: 3.5rem;
-      }
-      > .top {
+      > .title {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        margin-bottom: 0.5rem;
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        font-weight: 500;
 
-        @media (min-width: 768px) {
-          flex-direction: row;
-          align-items: baseline;
-        }
-        h2 {
-          margin-bottom: 0.5rem;
-          font-size: 1.125rem;
-          line-height: 1.75rem;
-          font-weight: 500;
-
-          cursor: pointer;
-
-          @media (min-width: 768px) {
-            font-size: 1.25rem;
-            line-height: 1.75rem;
-          }
-        }
+        cursor: pointer;
       }
       > .date {
         display: flex;
@@ -136,27 +87,23 @@ const StyledWrapper = styled(Link)`
           font-size: 0.875rem;
           line-height: 1.25rem;
           color: ${({ theme }) => theme.colors.gray10};
-          @media (min-width: 768px) {
-            margin-left: 0;
-          }
         }
       }
       > .summary {
         margin-bottom: 1rem;
         p {
-          display: none;
           line-height: 2rem;
           color: ${({ theme }) => theme.colors.gray11};
-
-          @media (min-width: 768px) {
-            display: block;
-          }
         }
       }
       > .tags {
         display: flex;
         gap: 0.5rem;
       }
+    }
+    > .rt {
+      border-radius: 12px;
+      overflow: hidden;
     }
   }
 `
