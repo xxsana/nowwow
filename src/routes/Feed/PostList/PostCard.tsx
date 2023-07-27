@@ -85,7 +85,7 @@ const StyledWrapper = styled(Link)`
           display: flex;
           flex-direction: column;
           justify-content: space-between;
-          font-size: 28px;
+          font-size: 24px;
           font-weight: 600;
 
           cursor: pointer;
@@ -93,7 +93,7 @@ const StyledWrapper = styled(Link)`
         }
 
         > .summary {
-          font-size: 20px;
+          font-size: 18px;
           font-weight: 300;
           color: ${({ theme }) => theme.colors.gray10};
         }

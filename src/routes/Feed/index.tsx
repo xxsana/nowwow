@@ -8,13 +8,60 @@ import { variables } from "src/styles"
 import Image from "next/image"
 import { CONFIG } from "site.config"
 import { MdLink, MdLocationPin, MdMail } from "react-icons/md"
+import { FaGithub, FaLinkedin, FaTwitter, FaLink } from "react-icons/fa"
+import { AspectRatio } from "@radix-ui/react-aspect-ratio"
+import usePostsQuery from "src/hooks/usePostsQuery"
+import Link from "next/link"
 
 type Props = {}
 
 const Feed: React.FC<Props> = () => {
+  const posts = usePostsQuery()
+
   return (
     <StyledWrapper>
-      <div className="lt">left</div>
+      <div className="lt">
+        <AspectRatio ratio={1}>
+          <Image
+            className="profileImg"
+            src={CONFIG.profile.image}
+            fill
+            alt=""
+          />
+        </AspectRatio>
+        <div className="top">
+          <div className="name">{CONFIG.profile.name}</div>
+          <div className="role">{CONFIG.profile.role}</div>
+        </div>
+        <div className="bio">{CONFIG.profile.bio}</div>
+        <div className="links">
+          {CONFIG.profile.email && (
+            <Link className="link" href={CONFIG.profile.email}>
+              <MdMail />
+            </Link>
+          )}
+          {CONFIG.profile.email && (
+            <Link className="link" href={CONFIG.profile.email}>
+              <FaGithub />
+            </Link>
+          )}
+          {CONFIG.profile.email && (
+            <Link className="link" href={CONFIG.profile.email}>
+              <FaLinkedin />
+            </Link>
+          )}
+          {CONFIG.profile.email && (
+            <Link className="link" href={CONFIG.profile.email}>
+              <FaTwitter />
+            </Link>
+          )}
+          {CONFIG.profile.email && (
+            <Link className="link" href={CONFIG.profile.email}>
+              <FaLink />
+            </Link>
+          )}
+        </div>
+      </div>
       <div className="rt">
         {/* <div className="profileSection">
           <div className="lt">
@@ -41,6 +88,7 @@ const Feed: React.FC<Props> = () => {
         </div> */}
         {/* <TagList /> */}
         {/* <FeedHeader /> */}
+        <div className="header">{posts.length} Posts</div>
         <PostList q={""} />
         <Footer />
       </div>
@@ -59,57 +107,78 @@ const StyledWrapper = styled.div`
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: minmax(300px, 300px) 1fr;
-  gap: 24px;
-
-  .profileSection {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    .lt {
-      position: relative;
-      width: 100px;
-      height: 100px;
-      overflow: hidden;
+  grid-template-columns: minmax(280px, 280px) 1fr;
+  gap: 36px;
+  > .lt {
+    .profileImg {
       border-radius: 50%;
-      background-color: ${({ theme }) => theme.colors.gray4};
+      background-color: ${({ theme }) => theme.colors.gray3};
     }
-    > .rt {
+    > .top {
+      padding: 16px 0;
       .name {
         font-size: 24px;
         font-weight: 600;
-        line-height: 32px;
       }
-      .bio {
-        font-size: 14px;
+      .role {
+        font-size: 18px;
         font-weight: 400;
-        line-height: 21px;
-        color: ${({ theme }) => theme.colors.gray10};
+        color: ${({ theme }) => theme.colors.gray9};
       }
-      .infoList {
-        margin-top: 8px;
-        font-size: 12px;
-        color: ${({ theme }) => theme.colors.gray11};
+    }
+    > .bio {
+      font-size: 16px;
+      font-weight: 300;
+      color: ${({ theme }) => theme.colors.gray11};
+    }
+
+    > .links {
+      margin-top: 14px;
+      display: flex;
+      gap: 10px;
+      overflow-x: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+      .link {
+        flex-shrink: 0;
+        display: block;
+        width: 30px;
+        height: 30px;
+        border-radius: 10px;
+        background-color: ${({ theme }) => theme.colors.gray3};
+        color: ${({ theme }) => theme.colors.gray9};
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &:hover {
+          opacity: 0.8;
+        }
+      }
+    }
+    .infoList {
+      font-size: 14px;
+      padding: 16px 0;
+      .infoItem {
         display: flex;
         align-items: center;
-        gap: 16px;
-        height: 15px;
-        .infoItem {
-          display: flex;
-          align-items: center;
-          svg {
-            font-size: 16px;
-            margin-right: 4px;
-          }
+        gap: 6px;
+        padding: 4px 0;
+        svg {
+          font-size: 16px;
+          margin-right: 4px;
+          color: ${({ theme }) => theme.colors.gray10};
+        }
+        desc {
+          color: ${({ theme }) => theme.colors.gray11};
         }
       }
     }
   }
-  hr {
-    margin: 24px 0;
-  }
-
-  > .footer {
-    padding-bottom: 2rem;
+  > .rt {
+    > .header {
+      font-size: 24px;
+      font-weight: 700;
+    }
   }
 `

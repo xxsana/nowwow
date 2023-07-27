@@ -10,7 +10,7 @@ const Logo = () => {
       aria-label={CONFIG.blog.title}
       className={roboto.className}
     >
-      {CONFIG.blog.title}.
+      {CONFIG.blog.title}
     </StyledWrapper>
   )
 }
