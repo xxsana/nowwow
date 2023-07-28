@@ -34,17 +34,15 @@ const TagList: React.FC<Props> = () => {
 
   return (
     <StyledWrapper>
-      <div className="list">
-        {Object.keys(data).map((key) => (
-          <a
-            key={key}
-            data-active={key === currentTag}
-            onClick={() => handleClickTag(key)}
-          >
-            {key}
-          </a>
-        ))}
-      </div>
+      {Object.keys(data).map((key) => (
+        <a
+          key={key}
+          data-active={key === currentTag}
+          onClick={() => handleClickTag(key)}
+        >
+          {key}
+        </a>
+      ))}
     </StyledWrapper>
   )
 }
@@ -52,41 +50,33 @@ const TagList: React.FC<Props> = () => {
 export default TagList
 
 const StyledWrapper = styled.div`
-  .list {
-    display: flex;
-    margin-bottom: 1.5rem;
-    gap: 0.25rem;
-    overflow: scroll;
+  display: flex;
+  gap: 12px;
+  overflow: auto;
 
-    ::-webkit-scrollbar {
-      display: none;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+
+  a {
+    display: block;
+    flex-shrink: 0;
+
+    padding: 6px 14px;
+    border-radius: 50px;
+    background-color: ${({ theme }) => theme.colors.gray4};
+    color: ${({ theme }) => theme.colors.gray10};
+    font-size: 12px;
+    font-weight: 400;
+    text-decoration: none;
+
+    :hover {
+      background-color: ${({ theme }) => theme.colors.gray4};
     }
-
-    a {
-      display: block;
-      padding: 0.25rem;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      margin-top: 0.25rem;
-      margin-bottom: 0.25rem;
-      border-radius: 0.75rem;
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-      color: ${({ theme }) => theme.colors.gray10};
-      flex-shrink: 0;
-      cursor: pointer;
-
-      :hover {
-        background-color: ${({ theme }) => theme.colors.gray4};
-      }
-      &[data-active="true"] {
-        color: ${({ theme }) => theme.colors.gray12};
-        background-color: ${({ theme }) => theme.colors.gray4};
-
-        :hover {
-          background-color: ${({ theme }) => theme.colors.gray4};
-        }
-      }
+    &[data-active="true"] {
+      color: ${({ theme }) => theme.colors.blue11};
+      background-color: ${({ theme }) => theme.colors.blue4};
+      font-weight: 600;
     }
   }
 `

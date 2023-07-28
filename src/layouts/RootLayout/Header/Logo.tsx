@@ -2,6 +2,7 @@ import Link from "next/link"
 import { CONFIG } from "site.config"
 import styled from "@emotion/styled"
 import { roboto } from "src/assets"
+import { colors } from "src/styles"
 
 const Logo = () => {
   return (

@@ -68,7 +68,7 @@ const StyledWrapper = styled(Link)`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 12px 0;
+      padding: 24px 0;
       > .top {
         > .category {
         }
@@ -79,7 +79,7 @@ const StyledWrapper = styled(Link)`
           font-size: 15px;
           font-weight: 300;
           margin-bottom: 12px;
-          color: ${({ theme }) => theme.colors.gray12};
+          color: ${({ theme }) => theme.colors.gray11};
         }
 
         > .title {
@@ -96,7 +96,7 @@ const StyledWrapper = styled(Link)`
         > .summary {
           font-size: 18px;
           font-weight: 300;
-          color: ${({ theme }) => theme.colors.gray10};
+          color: ${({ theme }) => theme.colors.gray11};
         }
       }
       > .btm {

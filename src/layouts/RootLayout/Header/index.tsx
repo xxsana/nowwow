@@ -43,7 +43,7 @@ const StyledWrapper = styled.div`
 
   .container {
     padding: 0 ${({ theme }) => theme.variables.paddingLg}px;
-    max-width: ${({ theme }) => theme.variables.widthMd}px;
+    max-width: ${({ theme }) => theme.variables.widthSm}px;
     display: flex;
     justify-content: space-between;
     align-items: center;
