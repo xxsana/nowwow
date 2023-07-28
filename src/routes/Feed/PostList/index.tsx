@@ -3,6 +3,7 @@ import React, { Fragment, useEffect, useState } from "react"
 import PostCard from "src/routes/Feed/PostList/PostCard"
 import usePostsQuery from "src/hooks/usePostsQuery"
 import styled from "@emotion/styled"
+import { filterPosts } from "src/libs/utils/notion"
 
 type Props = {
   q: string
@@ -10,7 +11,7 @@ type Props = {
 
 const PostList: React.FC<Props> = ({ q }) => {
   const router = useRouter()
-  const data = usePostsQuery()
+  const data = filterPosts(usePostsQuery())
   const [filteredPosts, setFilteredPosts] = useState(data)
 
   const currentTag = `${router.query.tag || ``}` || undefined

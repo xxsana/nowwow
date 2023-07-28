@@ -1,93 +1,42 @@
-import { FeedHeader } from "./FeedHeader"
 import Footer from "./Footer"
 import styled from "@emotion/styled"
-import TagList from "./TagList"
-import MobileProfileCard from "./MobileProfileCard"
 import PostList from "./PostList"
 import { variables } from "src/styles"
 import Image from "next/image"
 import { CONFIG } from "site.config"
-import { MdLink, MdLocationPin, MdMail } from "react-icons/md"
+import { MdMail } from "react-icons/md"
 import { FaGithub, FaLinkedin, FaTwitter, FaLink } from "react-icons/fa"
 import { AspectRatio } from "@radix-ui/react-aspect-ratio"
 import usePostsQuery from "src/hooks/usePostsQuery"
 import Link from "next/link"
+import NotionRenderer from "src/components/NotionRenderer"
+import usePostQuery from "src/hooks/usePostQuery"
+import ProfileSection from "./ProfileSection"
 
 type Props = {}
 
 const Feed: React.FC<Props> = () => {
   const posts = usePostsQuery()
+  const post = usePostQuery("about")
 
   return (
     <StyledWrapper>
       <div className="lt">
-        <AspectRatio ratio={1}>
-          <Image
-            className="profileImg"
-            src={CONFIG.profile.image}
-            fill
-            alt=""
-          />
-        </AspectRatio>
-        <div className="top">
-          <div className="name">{CONFIG.profile.name}</div>
-          <div className="role">{CONFIG.profile.role}</div>
-        </div>
-        <div className="bio">{CONFIG.profile.bio}</div>
-        <div className="links">
-          {CONFIG.profile.email && (
-            <Link className="link" href={CONFIG.profile.email}>
-              <MdMail />
-            </Link>
-          )}
-          {CONFIG.profile.email && (
-            <Link className="link" href={CONFIG.profile.email}>
-              <FaGithub />
-            </Link>
-          )}
-          {CONFIG.profile.email && (
-            <Link className="link" href={CONFIG.profile.email}>
-              <FaLinkedin />
-            </Link>
-          )}
-          {CONFIG.profile.email && (
-            <Link className="link" href={CONFIG.profile.email}>
-              <FaTwitter />
-            </Link>
-          )}
-          {CONFIG.profile.email && (
-            <Link className="link" href={CONFIG.profile.email}>
-              <FaLink />
-            </Link>
-          )}
-        </div>
+        <ProfileSection />
+        <section className="tags"></section>
+        <section className="projects"></section>
       </div>
       <div className="rt">
-        {/* <div className="profileSection">
-          <div className="lt">
-            <Image src={CONFIG.profile.image} fill alt="" />
-          </div>
-          <div className="rt">
-            <div className="name">{CONFIG.profile.name}</div>
-            <div className="bio">{CONFIG.profile.bio}</div>
-            <div className="infoList">
-              <div className="infoItem">
-                <MdLocationPin />
-                <div>Seoul, South Korea</div>
-              </div>
-              <div className="infoItem">
-                <MdLink />
-                <div>http://untilled.team</div>
-              </div>
-              <div className="infoItem">
-                <MdMail />
-                <div>morethanmin@gmail.com</div>
-              </div>
+        {/* <div className="header">Pinned</div> */}
+        {post && (
+          <section>
+            <div className="header">About</div>
+            <div className="aboutSection">
+              <NotionRenderer recordMap={post?.recordMap} />
             </div>
-          </div>
-        </div> */}
-        {/* <TagList /> */}
-        {/* <FeedHeader /> */}
+          </section>
+        )}
+        <div className="header">1,336 Articles in the last year</div>
         <div className="header">{posts.length} Posts</div>
         <PostList q={""} />
         <Footer />
@@ -101,7 +50,7 @@ const Feed: React.FC<Props> = () => {
 export default Feed
 
 const StyledWrapper = styled.div`
-  padding: ${variables.paddingLg}px;
+  padding: 48px ${variables.paddingLg}px;
   max-width: ${({ theme }) => theme.variables.widthMd}px;
   width: 100%;
   margin: 0 auto;
@@ -110,75 +59,25 @@ const StyledWrapper = styled.div`
   grid-template-columns: minmax(280px, 280px) 1fr;
   gap: 36px;
   > .lt {
-    .profileImg {
-      border-radius: 50%;
-      background-color: ${({ theme }) => theme.colors.gray3};
-    }
-    > .top {
-      padding: 16px 0;
-      .name {
-        font-size: 24px;
-        font-weight: 600;
-      }
-      .role {
-        font-size: 18px;
-        font-weight: 400;
-        color: ${({ theme }) => theme.colors.gray9};
-      }
-    }
-    > .bio {
-      font-size: 16px;
-      font-weight: 300;
-      color: ${({ theme }) => theme.colors.gray11};
-    }
-
-    > .links {
-      margin-top: 14px;
-      display: flex;
-      gap: 10px;
-      overflow-x: auto;
-      &::-webkit-scrollbar {
-        display: none;
-      }
-      .link {
-        flex-shrink: 0;
-        display: block;
-        width: 30px;
-        height: 30px;
-        border-radius: 10px;
-        background-color: ${({ theme }) => theme.colors.gray3};
-        color: ${({ theme }) => theme.colors.gray9};
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        &:hover {
-          opacity: 0.8;
-        }
-      }
-    }
-    .infoList {
-      font-size: 14px;
-      padding: 16px 0;
-      .infoItem {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-        padding: 4px 0;
-        svg {
-          font-size: 16px;
-          margin-right: 4px;
-          color: ${({ theme }) => theme.colors.gray10};
-        }
-        desc {
-          color: ${({ theme }) => theme.colors.gray11};
-        }
-      }
+    > .tags {
     }
   }
   > .rt {
-    > .header {
-      font-size: 24px;
-      font-weight: 700;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    section {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      > .header {
+        font-size: 18px;
+      }
+      > .aboutSection {
+        border-radius: 12px;
+        padding: 24px;
+        border: 1px solid ${({ theme }) => theme.colors.gray6};
+      }
     }
   }
 `

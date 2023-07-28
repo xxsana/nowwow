@@ -51,9 +51,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
     }
   }
 
-  await queryClient.prefetchQuery(queryKey.posts(), () =>
-    filterPosts(posts || [])
-  )
+  await queryClient.prefetchQuery(queryKey.posts(), () => posts || [])
   await queryClient.prefetchQuery(queryKey.post(`${slug}`), () => postDetail)
 
   return {

@@ -63,6 +63,7 @@ const StyledWrapper = styled(Link)`
     justify-content: space-between;
     height: 200px;
     gap: 24px;
+
     > .lt {
       display: flex;
       flex-direction: column;
