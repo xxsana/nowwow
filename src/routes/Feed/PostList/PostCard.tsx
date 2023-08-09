@@ -24,8 +24,8 @@ const PostCard: React.FC<Props> = ({ data }) => {
                   CONFIG.lang
                 )}
               </div>
-              <div>·</div>
-              <div>5 min read</div>
+              {/* <div>·</div>
+              <div>5 min read</div> */}
             </div>
             <div className="title">{data.title}</div>
             <div className="summary">{data.summary}</div>
@@ -44,9 +44,9 @@ const PostCard: React.FC<Props> = ({ data }) => {
           <div className="rt">
             <Image
               src={data.thumbnail}
-              fill
               alt={data.title}
               css={{ objectFit: "cover" }}
+              fill
             />
           </div>
         )}
@@ -61,14 +61,14 @@ const StyledWrapper = styled(Link)`
   article {
     display: flex;
     justify-content: space-between;
-    height: 200px;
+    height: 180px;
     gap: 24px;
 
     > .lt {
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 24px 0;
+      margin: 12px 0;
       > .top {
         > .category {
         }

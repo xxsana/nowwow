@@ -54,7 +54,7 @@ const StyledWrapper = styled.div`
   padding: 24px 0;
   display: flex;
   flex-direction: column;
-  gap: 36px;
+  gap: 48px;
   hr {
     margin: 24px 0;
   }

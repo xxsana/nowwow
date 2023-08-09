@@ -66,8 +66,8 @@ const StyledWrapper = styled.section`
   gap: 24px;
   .profileImgWrapper {
     flex-shrink: 0;
-    width: 180px;
-    height: 180px;
+    width: 140px;
+    height: 140px;
     .profileImg {
       flex-shrink: 0;
       border-radius: 50%;
@@ -88,7 +88,7 @@ const StyledWrapper = styled.section`
       }
     }
     > .bio {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 300;
       color: ${({ theme }) => theme.colors.gray11};
     }
