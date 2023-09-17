@@ -10,21 +10,16 @@ const CONFIG = {
     github: "xxsana",
     instagram: "",
   },
-  projects: [
-    {
-      name: `なう iOS`,
-      href: "https://github.com/nowwow",
-    },
-  ],
   // blog setting (required)
   blog: {
     title: "なう iOS",
     description: "",
+    theme: "auto",
   },
 
   // CONFIG configration (required)
   link: "https://morethan-log.vercel.app",
-  since: 2022, // If leave this empty, current year will be used.
+  since: 2023, // If leave this empty, current year will be used.
   lang: "en-US", // ['en-US', 'zh-CN', 'zh-HK', 'zh-TW', 'ja-JP', 'es-ES', 'ko-KR']
   ogImageGenerateURL: "https://og-image-korean.vercel.app", // The link to generate OG image, don't end with a slash
 
@@ -47,9 +42,9 @@ const CONFIG = {
     },
   },
   utterances: {
-    enable: true,
+    enable: false,
     config: {
-      repo: "nowwow",
+      repo: "xxsana/nowwow",
       "issue-term": "og:title",
       label: "💬 Utterances",
     },
