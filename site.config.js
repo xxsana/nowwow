@@ -10,6 +10,12 @@ const CONFIG = {
     github: "xxsana",
     instagram: "",
   },
+  projects: [
+    {
+      name: `なう iOS`,
+      href: "https://github.com/nowwow",
+    },
+  ],
   // blog setting (required)
   blog: {
     title: "なう iOS",
