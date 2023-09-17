@@ -13,7 +13,7 @@ const CONFIG = {
   projects: [
     {
       name: `なう iOS`,
-      href: "https://github.com/nowwow",
+      href: "",
     },
   ],
   // blog setting (required)
