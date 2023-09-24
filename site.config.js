@@ -30,7 +30,7 @@ const CONFIG = {
   ogImageGenerateURL: "https://og-image-korean.vercel.app",
   seo: {
     keywords: ["Swift", "SwiftUI", "iOS",  "UIKit",  "スウィフト",  "iOSプログラミング",  "開発ブログ"],
-  } // The link to generate OG image, don't end with a slash
+  }, // The link to generate OG image, don't end with a slash
 
   // notion configuration (required)
   notionConfig: {
