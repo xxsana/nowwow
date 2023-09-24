@@ -20,7 +20,7 @@ const CONFIG = {
   blog: {
     title: "なう iOS",
     description: "",
-    theme: "auto",
+    theme: "light",
   },
 
   // CONFIG configration (required)
