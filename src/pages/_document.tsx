@@ -8,9 +8,9 @@ class MyDocument extends Document {
         <Head>
           <link rel="icon" href="/favicon.ico" />
           <link
-            rel="apple-touch-icon"
+            rel="profile"
             sizes="192x192"
-            href="/apple-touch-icon.png"
+            href="/profile.png"
           ></link>
           <link
             rel="alternate"
