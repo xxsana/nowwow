@@ -12,7 +12,7 @@ const CusdisComponent = dynamic(
   () => {
     return import("./Cusdis")
   },
-  { ssr: true }
+  { ssr: false }
 )
 
 type Props = {
