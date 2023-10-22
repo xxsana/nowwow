@@ -1,10 +1,10 @@
 const CONFIG = {
   // profile setting (required)
   profile: {
-    name: "nowwow",
+    name: "なう now",
     image: "/profile.PNG", // If you want to create your own notion avatar, check out https://notion-avatar.vercel.app
     role: "ios developer",
-    bio: "",
+    bio: "korean in tokyo",
     email: "sanajeong.dev@gmail.com",
     linkedin: "",
     github: "xxsana",
@@ -12,14 +12,14 @@ const CONFIG = {
   },
   projects: [
     {
-      name: `なう iOS`,
+      name: `nowwow`,
       href: "",
     },
   ],
   // blog setting (required)
   blog: {
-    title: "なう iOS",
-    description: "",
+    title: "nowwow",
+    description: "nowwow iOS blog",
     theme: "light",
   },
 
