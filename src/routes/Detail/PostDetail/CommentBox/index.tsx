@@ -6,13 +6,13 @@ const UtterancesComponent = dynamic(
   () => {
     return import("./Utterances")
   },
-  { ssr: false }
+  { ssr: true }
 )
 const CusdisComponent = dynamic(
   () => {
     return import("./Cusdis")
   },
-  { ssr: false }
+  { ssr: true }
 )
 
 type Props = {
