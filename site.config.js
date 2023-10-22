@@ -51,7 +51,7 @@ const CONFIG = {
     },
   },
   utterances: {
-    enable: false,
+    enable: true,
     config: {
       repo: "xxsana/nowwow",
       "issue-term": "og:title",
